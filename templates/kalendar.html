@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>График</title>
+    <link rel="stylesheet" href="kalendar.css">
+</head>
+<body>
+    <i><h1>График</h1></i>
+    <label for="month">Избери месец:</label>
+    <select id="month" onchange="updateCalendar()">
+        <option value="0">Януари</option>
+        <option value="1">Февруари</option>
+        <option value="2">Март</option>
+        <option value="3">Април</option>
+        <option value="4">Май</option>
+        <option value="5">Юни</option>
+        <option value="6">Юли</option>
+        <option value="7">Август</option>
+        <option value="8">Септември</option>
+        <option value="9">Октомври</option>
+        <option value="10">Ноември</option>
+        <option value="11">Декември</option>
+    </select>
+    
+    <label for="year">Избери година:</label>
+    <select id="year" onchange="updateCalendar()">
+        <option value="2025">2025</option>
+        <option value="2026">2026</option>
+    </select>
+    <br>
+    <br>
+    <br>
+    <div id="calendar" class="calendar"></div>
+    
+    
+    <script src="kalendar.js"></script>    1
+</body>
+</html>
