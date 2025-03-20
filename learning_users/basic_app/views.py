@@ -14,10 +14,13 @@ def index(request):
     return render(request,'basic_app/index.html')
 
 @login_required
-def special(request):
+def specialP(request):
     # Remember to also set login url in settings.py!
     # LOGIN_URL = '/basic_app/user_login/'
     return HttpResponse("You are logged in. Nice!")
+@login_required
+def specialD(request):
+    return HttpResponse("You are logged in.Nice!")
 
 @login_required
 def user_logout(request):

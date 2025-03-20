@@ -8,11 +8,11 @@ class UserProfileInfo(models.Model):
     user = models.OneToOneField(User,on_delete=models.CASCADE)
 
     # Add any additional attributes you want
-    portfolio_site = models.URLField(blank=True)
+    
     # pip install pillow to use this!
     # Optional: pip install pillow --global-option=”build_ext” --global-option=”--disable-jpeg”
-    profile_pic = models.ImageField(upload_to='profile_pics',blank=True)
-
+    profile_pic_d = models.ImageField(upload_to='profile_pics',blank=True)
+    profile_pic_p=models.ImageField(upload_to='profile_pics',blank=False)
     def __str__(self):
         # Built-in attribute of django.contrib.auth.models.User !
         return self.user.username
