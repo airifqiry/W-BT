@@ -41,6 +41,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'basic_app',
+    'phonenumber_field',
+    
+    
 ]
 
 MIDDLEWARE = [
@@ -115,7 +118,14 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
+AUTHENTICATION_BACKENDS = [
 
+    # Needed to login by username in Django admin, regardless of `django-phone-auth`
+    'django.contrib.auth.backends.ModelBackend',
+
+    
+    
+]
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.10/topics/i18n/
@@ -129,6 +139,7 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
+PHONENUMBER_DEFAULT_REGION = 'BG'
 
 
 # Static files (CSS, JavaScript, Images)
@@ -142,3 +153,4 @@ MEDIA_ROOT = MEDIA_DIR
 MEDIA_URL = '/media/'
 
 LOGIN_URL = '/basic_app/user_login/'
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
