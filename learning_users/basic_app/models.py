@@ -14,7 +14,13 @@ class UserProfileInfo(models.Model):
     phone_number = PhoneNumberField(unique=True,validators=[validate_phone_number])
     location = models.CharField(max_length=100,blank=False,default='Unknown')
     profile_pic = models.ImageField(upload_to='profile_pics', blank=True)
-      
+    #skills = models.CharField(max_length=200, blank=True)
+    needs = models.TextField(blank=True)  # ⬅️ ново
+    user_type = models.CharField(max_length=10, choices=USER_TYPES, default='patient')
+
+    def __str__(self):
+        return f"{self.user.username} ({self.user_type})"
+
 
     def __str__(self):
         return f"{self.user.username} - {self.phone_number}"

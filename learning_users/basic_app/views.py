@@ -1,6 +1,8 @@
 from django.shortcuts import render
-from django.shortcuts import redirect
 from basic_app.forms import UserForm,UserProfileInfoForm
+from django.http import JsonResponse  # Добави това
+from .models import UserProfileInfo  
+
 
 
 
@@ -12,7 +14,7 @@ from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 def index(request):
-    return render(request,'basic_app/index.html')
+    return render(request,'basic_app/home_page.html')
 
 @login_required
 def special(request):
@@ -28,47 +30,65 @@ def user_logout(request):
     # Return to homepage.
     return HttpResponseRedirect(reverse('index'))
 
-def register_patient(request):
-    return register_user(request, user_type='patient')
+def register(request):
 
-def register_volunteer(request):
-    return register_user(request, user_type='volunteer')
-
-def register_user(request, user_type):
     registered = False
-    
+
     if request.method == 'POST':
+
+        # Get info from "both" forms
+        # It appears as one form to the user on the .html page
         user_form = UserForm(data=request.POST)
         profile_form = UserProfileInfoForm(data=request.POST)
 
+        # Check to see both forms are valid
         if user_form.is_valid() and profile_form.is_valid():
+
+            # Save User Form to Database
             user = user_form.save()
+
+            # Hash the password
             user.set_password(user.password)
+
+            # Update with Hashed password
             user.save()
 
-            profile = profile_form.save(commit=False)
-            profile.user = user
-            profile.user_type = user_type  
+            # Now we deal with the extra info!
 
+            # Can't commit yet because we still need to manipulate
+            profile = profile_form.save(commit=False)
+
+            # Set One to One relationship between
+            # UserForm and UserProfileInfoForm
+            profile.user = user
+
+            # Check if they provided a profile picture
             if 'profile_pic' in request.FILES:
+                print('found it')
+                # If yes, then grab it from the POST form reply
                 profile.profile_pic = request.FILES['profile_pic']
 
+            # Now save model
             profile.save()
+
+            # Registration Successful!
             registered = True
+
         else:
-            print(user_form.errors, profile_form.errors)
+            # One of the forms was invalid if this else gets called.
+            print(user_form.errors,profile_form.errors)
+
     else:
+        # Was not an HTTP post so we just render the forms as blank.
         user_form = UserForm()
         profile_form = UserProfileInfoForm()
-    
-    template_name = 'basic_app/registaciqPacienti.html' if user_type == 'patient' else 'basic_app/registraciqDobrovolci.html'
-    return render(request, template_name, {
-        'user_form': user_form,
-        'profile_form': profile_form,
-        'registered': registered
 
-    })
-
+    # This is the render and context dictionary to feed
+    # back to the registration.html file page.
+    return render(request,'basic_app/registration.html',
+                          {'user_form':user_form,
+                           'profile_form':profile_form,
+                           'registered':registered})
 
 def user_login(request):
 
@@ -100,12 +120,26 @@ def user_login(request):
     else:
         #Nothing has been provided for username or password.
         return render(request, 'basic_app/login.html', {})
-@login_required
-def login_success(request):
-    profile = request.user.userprofileinfo
-    if profile.user_type == 'volunteer':
-        return redirect('volunteer_dashboard')
-    elif profile.user_type == 'patient':
-        return redirect('patient_dashboard')
-    return redirect('home')
 
+@login_required
+def dashboard(request):
+    user = request.user
+    profile_type = user.profile_type
+    context = {
+        'username': user.username,
+    }
+
+    if profile_type == 'volunteer':
+        context['message'] = 'Здравей, доброволец! Тук можеш да видиш списък с хора, които се нуждаят от помощ.'
+        context['action_link'] = '/volunteer-tasks/'  #primeren link
+        context['action_text'] = 'Виж задачите за доброволци'
+    elif profile_type == 'needy':
+        context['message'] = 'Здравей! Тук можеш да поискаш помощ от доброволци.'
+        context['action_link'] = '/request-help/'  #tva sushto
+        context['action_text'] = 'Поискай помощ'
+
+    return render(request, 'dashboard.html', context)
+
+def get_patients(request):
+    patients = UserProfileInfo.objects.filter(user_type='patient').values('user__first_name', 'user__last_name', 'needs', 'location')
+    return JsonResponse(list(patients), safe=False)
