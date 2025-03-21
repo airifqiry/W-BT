@@ -7,28 +7,69 @@ from basic_app.validators import validate_phone_number
 
 class UserForm(forms.ModelForm):
     password = forms.CharField(
+        label="Парола",
         widget=forms.PasswordInput(),
-        validators=[custom_pass_validation]
-                               )
+        validators=[custom_pass_validation],
+        error_messages={
+        'required':'Моля, въведете паролата наново! '
+        }  )
 
     class Meta:
         model = User
         fields = ('first_name', 'last_name', 'username', 'password', 'email')
+        labels = {
+            'first_name': 'Име',
+            'last_name': 'Фамилия',
+            'username': 'Потребителско име',
+            'email': 'Имейл',
+        }
+        error_messages = {
+            'username': {
+                'required': 'Моля, въведете потребителско име.',
+                'unique': 'Това потребителско име вече съществува.',
+            },
+            'email': {
+                'required': 'Моля, въведете имейл адрес.',
+                'invalid': 'Невалиден имейл адрес.',
+            }
+        }
 
 class UserProfileInfoForm(forms.ModelForm):
-    phone_number = PhoneNumberField(required=True, initial='+359', validators=[validate_phone_number])  
-    location = forms.CharField(max_length=100, required=True)
-    profile_pic = forms.ImageField(required=False)
-    user_type = forms.ChoiceField(choices=UserProfileInfo.USER_TYPES, required=True)  # 👈
+    phone_number = PhoneNumberField(
+        required=True,
+        initial='+359',
+        label='Телефонен номер',
+        validators=[validate_phone_number],
+        error_messages={
+            'required': 'Моля, въведете телефонен номер.',
+            'invalid': 'Моля, въведете валиден телефонен номер.'
+        }
+    )
+    
+    location = forms.CharField(
+        max_length=100,
+        required=True,
+        label='Местоживеене',
+        error_messages={
+            'required': 'Моля, въведете местоживеене.'
+        }
+    )
+
+    profile_pic = forms.ImageField(
+        required=False,
+        label='Профилна снимка'
+    )
+
+
 
     class Meta:
         model = UserProfileInfo
-        fields = ('phone_number', 'location', 'profile_pic', 'user_type')
+        fields = ('phone_number', 'location', 'profile_pic')
 
     def clean_phone_number(self):
         phone_number = self.cleaned_data.get('phone_number')
         if UserProfileInfo.objects.filter(phone_number=phone_number).exists():
-            raise forms.ValidationError("Този телефонен номер вече съществува!")
+            raise forms.ValidationError("Този телефонен номер вече е използван.")
         return phone_number
 
     def clean(self):

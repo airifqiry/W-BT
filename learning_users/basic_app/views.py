@@ -36,7 +36,7 @@ def register_volunteer(request):
 
 def register_user(request, user_type):
     registered = False
-
+    
     if request.method == 'POST':
         user_form = UserForm(data=request.POST)
         profile_form = UserProfileInfoForm(data=request.POST)
@@ -48,7 +48,7 @@ def register_user(request, user_type):
 
             profile = profile_form.save(commit=False)
             profile.user = user
-            profile.user_type = user_type  # нуждаещ се или доброволец
+            profile.user_type = user_type  
 
             if 'profile_pic' in request.FILES:
                 profile.profile_pic = request.FILES['profile_pic']
@@ -60,12 +60,13 @@ def register_user(request, user_type):
     else:
         user_form = UserForm()
         profile_form = UserProfileInfoForm()
-
+    
     template_name = 'basic_app/registaciqPacienti.html' if user_type == 'patient' else 'basic_app/registraciqDobrovolci.html'
     return render(request, template_name, {
         'user_form': user_form,
         'profile_form': profile_form,
         'registered': registered
+
     })
 
 
