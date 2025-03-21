@@ -35,6 +35,7 @@
     <div class="container">
         <h2>Регистрация за доброволци</h2>
         <form action="#" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
             <label for="first-name">Име:</label>
             <input type="text" id="first-name" name="first-name" required>
             

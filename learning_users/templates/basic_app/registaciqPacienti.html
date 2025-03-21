@@ -1,17 +1,19 @@
 <!DOCTYPE html>
+{%load static%}
 <html lang="bg">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Регистрация</title>
-    <link rel="stylesheet" href="../static/registraciqPacienti.css">
+    <link rel="stylesheet" href="{% static 'registraciqPacienti.css' %}">
+
 </head>
 <body>
     <header>
         <nav class="nav">
             <ul>
                 <div class="logo">
-                    <img class="logo img" src="../static/logo.webp"/>
+                    <img class="logo img" src="{% static "logo.webp" %}">
                </div>
                <br>
                <div class="nav">
@@ -25,7 +27,7 @@
         </div>
         <h1 style="color: white;">Young hearts & Old hands</h1>
         <div class="nav">
-        <img class="logo img" src="../static/log in.png"/>
+        <img class="logo img" src="{% static "log in.png"%}"/>
             <a href="log_in.html" class="docs-link">Вход</a>
         </div>
         </nav>
@@ -34,6 +36,7 @@
     <div class="container">
         <h2>Регистрация за хора в нужда</h2>
         <form action="#" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
             <label for="first-name">Име:</label>
             <input type="text" id="first-name" name="first-name" required>
             
