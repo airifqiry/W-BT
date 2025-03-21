@@ -3,11 +3,10 @@ from basic_app.forms import UserForm,UserProfileInfoForm
 from django.http import JsonResponse  # Добави това
 from .models import UserProfileInfo  
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth import logout
+from django.shortcuts import redirect
 
-
-
-
-
+ 
 
 
 # Extra Imports for the Login and Logout Capabilities
@@ -20,19 +19,10 @@ from django.contrib.auth.decorators import login_required
 def index(request):
     return render(request,'basic_app/index.html')
 
-@login_required
-def special(request):
-    # Remember to also set login url in settings.py!
-    # LOGIN_URL = '/basic_app/user_login/'
-    return HttpResponse("You are logged in. Nice!")
 
 
-@login_required
-def user_logout(request):
-    # Log out the user.
-    logout(request)
-    # Return to homepage.
-    return HttpResponseRedirect(reverse('index'))
+
+
 
 def register(request):
 
@@ -139,7 +129,7 @@ def calendar_view(request):
 
 @login_required
 def volunteer_dashboard(request):
-   return render(request, 'basic_app/homeDobrovolci.html')  # или шаблон по избор
+   return render(request, 'basic_app/homePacienti.html')  # или шаблон по избор
 
 @login_required
 def patient_dashboard(request):
@@ -154,3 +144,8 @@ def register_volunteer(request):
     request.GET = request.GET.copy()
     request.GET['user_type'] = 'volunteer'
     return register(request)
+
+@login_required
+def logout_view(request):
+    logout(request)
+    return redirect('index') 

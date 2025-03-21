@@ -1,6 +1,13 @@
 from django.urls import path,include 
 from basic_app import views
 from django.urls import path
+from django.urls import path
+from .views import logout_view
+
+
+    
+    
+
 
 
 #TEMPLAT EURLS
@@ -12,12 +19,10 @@ urlpatterns = [
      path('login_success/', views.login_success, name='login_success'),
     path('dashboard/volunteer/', views.volunteer_dashboard, name='volunteer_dashboard'),
     path('dashboard/patient/', views.patient_dashboard, name='patient_dashboard'),
-]
-
-urlpatterns = [
     path('register_patient/', views.register_patient, name='register_patient'),  
     path('register_volunteer/', views.register_volunteer, name='register_volunteer'),  
     path('login/',views.login_view,name='user_login'),
-    path('calendar/',views.calendar_view,name='calendar')
+    path('calendar/',views.calendar_view,name='calendar'),
+    path('logout/', logout_view, name='logout'),
 ]
 
