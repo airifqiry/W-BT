@@ -1,0 +1,36 @@
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #121212;
+    color: #fff;
+    margin: 0;
+    padding: 20px;
+    text-align: center;
+}
+
+header {
+    background-color: #1E1E1E;
+    padding: 15px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+table {
+    width: 80%;
+    margin: auto;
+    border-collapse: collapse;
+    background: #1E1E1E;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-top: 20px;
+}
+
+th, td {
+    padding: 10px;
+    border-bottom: 1px solid #333;
+}
+
+th {
+    background: #FFD700;
+    color: #000;
+}
