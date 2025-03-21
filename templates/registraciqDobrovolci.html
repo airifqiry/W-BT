@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Регистрация</title>
+    <link rel="stylesheet" href="../static/registraciqDobrovolci.css">
+</head>
+<body>
+    <header>
+        <nav class="nav">
+            <ul>
+                <div class="logo">
+                    <img class="logo img" src="../static/logo.webp"/>
+               </div>
+               <br>
+               <div class="nav">
+                <li><a href="home_page.html">Home</a></li>
+                <li><a href="kalendar.html">График</a></li>
+                <li class="dropdown">
+                    <a href="donations.html">Дарения</a>
+                    
+                </li>
+            </ul>
+        </div>
+        <h1 style="color: white;">Young hearts & Old hands</h1>
+        <div class="nav">
+        <img class="logo img" src="../static/log in.png"/>
+            <a href="log_in.html" class="docs-link">Вход</a>
+        </div>
+        </nav>
+    </header>
+
+    <div class="container">
+        <h2>Регистрация за доброволци</h2>
+        <form action="#" method="post" enctype="multipart/form-data">
+            <label for="first-name">Име:</label>
+            <input type="text" id="first-name" name="first-name" required>
+            
+            <label for="last-name">Фамилия:</label>
+            <input type="text" id="last-name" name="last-name" required>
+
+            <label for="place-of-living">Град:</label>
+            <input type="text" id="place-of-living" name="place-of-living" required>
+
+            <label for="Telephone-number">Телефонен номер:</label>
+            <input type="text" id="Telephone-number" name="Telephone-number" required>
+            
+            <label for="username">Потребителско име:</label>
+            <input type="text" id="username" name="username" required>
+            
+            <label for="password">Парола:</label>
+            <input type="password" id="password" name="password" required>
+            
+            <label for="profile-pic">Прикачете профилна снимка:</label>
+            <input type="file" id="profile-pic" name="profile-pic" accept="image/*">
+            
+            <label class="checkbox-label">Какви услуги предлагате?</label>
+            <div class="checkbox-group">
+                <label><input type="checkbox" name="service" value="Медицинска"> Медицинска</label>
+                <label><input type="checkbox" name="service" value="Доставчик"> Доставчик</label>
+                <label><input type="checkbox" name="service" value="Хигиенист"> Хигиенист</label>
+                <label><input type="checkbox" name="service" value="Готвач"> Готвач</label>
+                <label><input type="checkbox" name="service" value="Психотерапевт"> Психотерапевт</label>
+            </div>
+            
+            <button type="submit">Регистрация</button>
+        </form>
+    </div>
+</body>
+</html>

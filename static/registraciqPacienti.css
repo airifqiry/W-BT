@@ -1,0 +1,183 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+body {
+    background-color: #C8D9E6; /* Sky Blue */
+    display: flex;
+    flex-direction: column; /* Ensures content is stacked vertically */
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+
+/*body {
+    background-color: #C8D9E6; /* Sky Blue *//*
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+   
+}*/
+header {
+    background-color: #2F4156; /* Navy */
+    padding: 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    position: fixed; /* Keep it at the top */
+    top: 0;
+    left: 0;
+    width: 100%; /* Make it full width */
+    z-index: 1000;
+}
+
+.nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto; /* Centers the navbar content */
+    padding: 0 20px; /* Adds space on the sides */
+    gap: 20px;
+}
+
+
+
+
+
+
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+}
+
+nav ul li {
+    position: relative;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #FFFFFF; /* White */
+    font-weight: 500;
+}
+
+.dropdown-arrow {
+    font-size: 12px;
+    margin-left: 5px;
+    color: #FFFFFF; /* White */
+}
+
+
+    
+    .logo {
+        display: flex; 
+        align-items: center; /* Align logo vertically */
+        justify-content: center; /* Center horizontally */
+        height: 60px; /* Adjust height of the logo container */
+    }
+    
+    .logo img {
+        height: 90px; /* Resize logo */
+        width: auto;  /* Maintain aspect ratio */
+       /* display: block;*/
+    }
+
+.docs-link {
+    text-decoration: none;
+    color: #FFFFFF; /* White */
+    font-weight: 500;
+}
+
+
+.container {
+    background-color: #FFFFFF; /* White */
+    max-width: 700px;
+    width: 100%;
+    padding: 120px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+    text-align: center;
+    color: #2F4156; /* Navy */
+    margin-bottom: 30px;
+    font-size: 28px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+label {
+    color: #2F4156; /* Navy */
+    font-weight: 500;
+    font-size: 16px;
+}
+
+input[type="text"],
+input[type="password"],
+input[type="file"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #C8D9E6; /* Sky Blue */
+    border-radius: 5px;
+    font-size: 16px;
+    background-color: #F5EFEB; /* Beige */
+    transition: border-color 0.3s ease;
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus,
+input[type="file"]:focus {
+    outline: none;
+    border-color: #567C8D; /* Teal */
+}
+
+.checkbox-label {
+    color: #2F4156; /* Navy */
+    font-weight: 500;
+    font-size: 16px;
+    margin-top: 10px;
+}
+
+.checkbox-group {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 5px;
+}
+
+.checkbox-group label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #333;
+    font-size: 14px;
+}
+
+input[type="checkbox"] {
+    accent-color: #567C8D; /* Teal */
+}
+
+button[type="submit"] {
+    background-color: #2F4156; /* Navy */
+    color: #FFFFFF; /* White */
+    border: none;
+    padding: 12px;
+    font-size: 16px;
+    font-weight: 500;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button[type="submit"]:hover {
+    background-color: #3a506b; /* Малко по-светъл Navy за hover ефект */
+}

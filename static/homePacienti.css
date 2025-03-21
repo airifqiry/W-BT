@@ -1,0 +1,259 @@
+/* Глобални стилове */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Arial", sans-serif;
+}
+
+body {
+    background-color: #F5EFEB; /* Beige */
+    color: #2F4156; /* Navy */
+    line-height: 1.6;
+}
+
+
+/* Header */
+header {
+    background-color: #2F4156; /* Navy */
+    padding: 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    
+    gap: 20px;
+}
+
+
+
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+}
+
+nav ul li {
+    position: relative;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #FFFFFF; /* White */
+    font-weight: 500;
+}
+
+.dropdown-arrow {
+    font-size: 12px;
+    margin-left: 5px;
+    color: #FFFFFF; /* White */
+}
+
+
+    
+    .logo {
+        display: flex; 
+        align-items: center; /* Align logo vertically */
+        justify-content: center; /* Center horizontally */
+        height: 60px; /* Adjust height of the logo container */
+    }
+    
+    .logo img {
+        height: 90px; /* Resize logo */
+        width: auto;  /* Maintain aspect ratio */
+       /* display: block;*/
+    }
+
+.docs-link {
+    text-decoration: none;
+    color: #FFFFFF; /* White */
+    font-weight: 500;
+}
+/* Анимация за плавно появяване */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Основен стил за секцията */
+.how-it-works {
+    max-width: 1000px;
+    margin: 50px auto;
+    text-align: center;
+    background: #FFFFFF;
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    animation: fadeIn 1s ease-in-out;
+}
+
+/* Заглавие */
+.how-it-works h2 {
+    font-size: 28px;
+    color: #2F4156; /* Navy */
+    margin-bottom: 20px;
+}
+
+/* Контейнер за стъпките */
+.steps {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    margin-top: 30px;
+}
+
+/* Всяка стъпка */
+.step {
+    flex: 1;
+    background: #C8D9E6; /* Sky Blue */
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    animation: fadeIn 1s ease-in-out;
+}
+
+/* Анимация при hover */
+.step:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* Иконките в стъпките */
+.step img {
+    width: 60px;
+    height: 60px;
+    margin-bottom: 15px;
+}
+
+/* Заглавия на стъпките */
+.step h3 {
+    font-size: 20px;
+    color: #2F4156; /* Navy */
+    margin-bottom: 10px;
+}
+
+/* Описание на стъпките */
+.step p {
+    font-size: 16px;
+    color: #333;
+}
+
+/* Контейнер за CTA блоковете */
+.cta-container {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    max-width: 1000px;
+    margin: 50px auto;
+}
+
+/* Стилизиране на CTA блоковете */
+.cta {
+    flex: 1;
+    background-color: #C8D9E6; /* Sky Blue */
+    text-align: center;
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Анимация при hover */
+.cta:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+.cta h2 {
+    font-size: 20px;
+    margin-bottom: 20px;
+    color: #2F4156; /* Navy */
+}
+
+/* Бутон стил */
+.cta button {
+    background-color: #2F4156; /* Navy */
+    color: #FFFFFF; /* White */
+    border: none;
+    padding: 12px 24px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+
+/* Бутон hover ефект */
+.cta button:hover {
+    background-color: #567C8D; /* Teal */
+    transform: scale(1.05);
+}
+
+/* Секция "Цели" */
+.goals {
+    max-width: 1000px;
+    margin: 50px auto;
+    padding: 30px;
+    background-color: #FFFFFF; /* White */
+    border-radius: 15px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    animation: fadeIn 0.8s ease-in-out;
+}
+
+/* Анимация за плавно появяване */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.goals h2 {
+    font-size: 26px;
+    margin-bottom: 15px;
+    color: #2F4156; /* Navy */
+}
+
+.goals p {
+    font-size: 18px;
+    color: #333;
+}
+
+/* Footer */
+footer {
+    background-color: #2F4156; /* Navy */
+    padding: 30px 20px;
+    text-align: center;
+    color: #FFFFFF; /* White */
+}
+
+.footer-section h3 {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.footer-section a {
+    color: #C8D9E6; /* Sky Blue */
+    text-decoration: none;
+}
+
+.footer-bottom {
+    margin-top: 15px;
+    font-size: 14px;
+    color: #C8D9E6;
+}
+
