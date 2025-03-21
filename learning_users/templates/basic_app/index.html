@@ -18,7 +18,7 @@
                <br>
                <div class="nav">
                 <li><a href="{% url 'index' %}">Home</a></li>
-                <li><a href="kalendar.html">График</a></li>
+                <li><a href="{% url 'basic_app:calendar' %}">График</a></li>
                 <li class="dropdown">
                     
                     
@@ -28,7 +28,8 @@
         <h2 style="color: white;">Young hearts & Old hands</h2>
         <div class="nav">
         <img class="logo img" src="{%static 'log in.png'%}"/>
-            <a href="log_in.html" class="docs-link">Вход</a>
+        <a href="{% url 'basic_app:user_login' %}" class="docs-link">Вход</a>
+
         </div>
         </nav>
     </header>

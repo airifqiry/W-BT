@@ -7,7 +7,7 @@ from .validators import validate_phone_number
 
 class UserProfileInfo(models.Model):
     USER_TYPES=[
-     ('volunteer','patient')   
+     ('volunteer','patient')
     ]
 
     user = models.OneToOneField(User, on_delete=models.CASCADE)
@@ -16,7 +16,8 @@ class UserProfileInfo(models.Model):
     profile_pic = models.ImageField(upload_to='profile_pics', blank=True)
     #skills = models.CharField(max_length=200, blank=True)
     needs = models.TextField(blank=True)  # ⬅️ ново
-    user_type = models.CharField(max_length=10, choices=USER_TYPES, default='patient')
+    user_type = models.CharField(max_length=20, choices=USER_TYPES, default='patient')
+
 
     def __str__(self):
         return f"{self.user.username} ({self.user_type})"
