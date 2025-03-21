@@ -1,10 +1,11 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="bg">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Young heats & Old hands</title>
-    <link rel="stylesheet" href="../static/homePacienti.css">
+    <link rel="stylesheet" href="{% static 'homePacienti.css'%}">
 </head>
 <body>
     <!-- Header -->
@@ -12,7 +13,7 @@
         <nav class="nav">
             <ul>
                 <div class="logo">
-                    <img class="logo img" src="../static/logo.webp"/>
+                    <img class="logo img" src="{% static 'logo.webp'%}"/>
                </div>
                <br>
                <div class="nav">
@@ -26,7 +27,7 @@
         </div>
         <h2 style="color: white;">Young hearts & Old hands</h2>
         <div class="nav">
-        <img class="logo img" src="../static/log in.png"/>
+        <img class="logo img" src="{% static 'log in.png' %}"/>
             <a href="log_in.html" class="docs-link">Вход</a>
         </div>
         </nav>
@@ -64,17 +65,17 @@
     <h2>Как работи?</h2>
     <div class="steps">
         <div class="step">
-            <img src="../static/chooseicon.png.png" alt="Избери кауза">
+            <img src="{% static 'chooseicon.png.png' %}" alt="Избери кауза">
             <h3>1. Избери кауза</h3>
             <p>Разгледай списъка с хора в нужда и избери на кого можеш да помогнеш.</p>
         </div>
         <div class="step">
-            <img src="../static/signupicon.png.png" alt="Запиши се">
+            <img src="{% static 'signupicon.png.png' %}" alt="Запиши се">
             <h3>2. Запиши се</h3>
             <p>Регистрирай се в графика и определи кога можеш да помогнеш.</p>
         </div>
         <div class="step">
-            <img src="../static/helpicon.png.png" alt="Окаже помощ">
+            <img src="{% static 'helpicon.png.png' %}" alt="Окаже помощ">
             <h3>3. Окаже помощ</h3>
             <p>Посети човека, направи дарение или предложи помощ според нуждите.</p>
         </div>
@@ -122,9 +123,9 @@
                 <a href="#">Terms & Conditions</a>
                 <a href="#">Privacy policy</a>
                 <div class="social-icons">
-                    <a href="#"><img src="twitter-icon.png" alt="Twitter"></a>
-                    <a href="#"><img src="linkedin-icon.png" alt="LinkedIn"></a>
-                    <a href="#"><img src="facebook-icon.png" alt="Facebook"></a>
+                    <a href="#"><img src="{% static 'twitter-icon.png' %}" alt="Twitter"></a>
+                    <a href="#"><img src="{% static 'linkedin-icon.png' %}" alt="LinkedIn"></a>
+                    <a href="#"><img src="{% static 'facebook-icon.png' %}" alt="Facebook"></a>
                 </div>
             </div>
         </div>
