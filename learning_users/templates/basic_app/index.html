@@ -51,13 +51,13 @@
     <!-- Call to Action Section -->
     <section class="cta">
         <h2>Ако Търсиш Помощ</h2>
-        <a href="{% url 'register_patient' %}"><button>Щракни Тук</button></a>
+        <button><a href="{% url 'basic_app:register_patient' %}">Щракни Тук</a></button>
     </section>
 
     <!-- Call to Action Section 2 -->
     <section class="cta">
         <h2>Ако Искаш да си Доброволец</h2>
-       <a href="registraciqDobrovolci.html"> <button>Щракни Тук</button></a>
+       <button><a href="{% url 'basic_app:register_volunteer' %}"> Щракни Тук</a></button>
     </section>
 
     <!-- Goals Section -->
