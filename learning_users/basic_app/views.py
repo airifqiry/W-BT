@@ -138,7 +138,7 @@ def calendar_view(request):
 
 @login_required
 def volunteer_dashboard(request):
-   return render(request, 'basic_app/homePacienti.html')  # или шаблон по избор
+   return render(request, 'basic_app/homeDobrovolci.html')  # или шаблон по избор
 
 @login_required
 def patient_dashboard(request):
