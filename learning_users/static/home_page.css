@@ -387,7 +387,7 @@ nav ul li a {
 
 /* Footer */
 footer {
-    background-color: #FFFFFF; /* White */
+    background-color: #2F4156; /* White */
     padding: 40px 20px;
     box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
 }
@@ -403,13 +403,13 @@ footer {
 .footer-section h3 {
     font-size: 18px;
     margin-bottom: 10px;
-    color: #2F4156; /* Navy */
+    color: #ffffff; /* Navy */
 }
 
 .footer-section a {
     display: block;
     text-decoration: none;
-    color: #333;
+    color: #ffffff;
     margin-bottom: 5px;
 }
 
@@ -428,5 +428,5 @@ footer {
     text-align: center;
     margin-top: 20px;
     font-size: 14px;
-    color: #666;
+    color: #ffffff;
 }

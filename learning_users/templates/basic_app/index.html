@@ -53,25 +53,25 @@
     <!-- Call to Action Section -->
     <section class="cta">
         <h2>Ако Търсиш Помощ</h2>
-        <button><a href="{% url 'basic_app:register_patient' %}">Щракни Тук</a></button>
+        <a href="{% url 'basic_app:register_patient' %}"><button>Щракни Тук</button></a>
     </section>
 
     <!-- Call to Action Section 2 -->
     <section class="cta">
-        <h2>Ако Искаш да си Доброволец</h2>
-       <button><a href="{% url 'basic_app:register_volunteer' %}"> Щракни Тук</a></button>
+        <h2>Ако искаш да си Доброволец</h2>
+       <a href="{% url 'basic_app:register_volunteer' %}"><button>Щракни Тук</button></a>
     </section>
 
     <!-- Goals Section -->
     <section class="goals">
-        <h2>Цели</h2>
+        <h2>Цел</h2>
         <p>Целта на проекта е да окажем подкрепа на хора, които се намират в затруднено положение и имат нужда от помощ, независимо дали става въпрос за физическа, емоционална, социална или финансова подкрепа. Стремим се да предоставим необходимите ресурси, информация и насоки, за да подобрим качеството на живот на тези, които се нуждаят от съдействие. Нашите екипи работят усилено, за да създаде благоприятна среда, в която всеки човек може да получи адекватна помощ и мотивация за справяне с предизвикателствата, преди които е изправен. Ако ти си човек с желание и възможност да помогне на другите, или самите ти се нуждаеш от подкрепа, си на правилното място! Нашата общност е създадена, за да създава хората и да насърчава добротата, солидарността и взаимопомощта. Независимо дали искаш да подадеш ръка или да потърсиш помощ – заедно можем да направим разликата!</p>
     </section>
 
     <!-- Footer -->
-    <footer>
+    <footer style="background-color: #2F4156;">
         <div class="footer-content">
-            <div class="footer-logo">Company Logo</div>
+            <div class="footer-logo"><img style="height: 100px;width: 100px;"src="{% static 'logo.webp'%}"></div>
             <div class="footer-section">
                 <h3>Company</h3>
                 <a href="#">How it works</a>
@@ -89,15 +89,11 @@
                 <h3>About</h3>
                 <a href="#">Terms & Conditions</a>
                 <a href="#">Privacy policy</a>
-                <div class="social-icons">
-                    <a href="#"><img src="twitter-icon.png" alt="Twitter"></a>
-                    <a href="#"><img src="linkedin-icon.png" alt="LinkedIn"></a>
-                    <a href="#"><img src="facebook-icon.png" alt="Facebook"></a>
-                </div>
+                
             </div>
         </div>
         <div class="footer-bottom">
-            <p>Copyright © 2021 Company name</p>
+            <p>Copyright © 2021 Young hearts & Old hands</p>
         </div>
     </footer>
 </body>
