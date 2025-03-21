@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.shortcuts import redirect
 from basic_app.forms import UserForm,UserProfileInfoForm
 
 
@@ -117,3 +118,12 @@ def user_login(request):
     else:
         #Nothing has been provided for username or password.
         return render(request, 'basic_app/login.html', {})
+@login_required
+def login_success(request):
+    profile = request.user.userprofileinfo
+    if profile.user_type == 'volunteer':
+        return redirect('volunteer_dashboard')
+    elif profile.user_type == 'patient':
+        return redirect('patient_dashboard')
+    return redirect('home')
+

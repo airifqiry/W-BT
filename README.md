@@ -1,3 +1,6 @@
 # W-BT
-Hack tues
-Kogato rabotim na proekta tuka upload-vaite codovete
+Predi start na proekta:
+
+```
+pip3 -r requirements.txt
+```
