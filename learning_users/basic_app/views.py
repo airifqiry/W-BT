@@ -150,7 +150,7 @@ def register_volunteer(request):
     return register(request)
 
 @login_required
-def logout_view(request):
+def user_logout(request):
     logout(request)
     return redirect('index') 
 
