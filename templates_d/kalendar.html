@@ -4,10 +4,40 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>График</title>
-    <link rel="stylesheet" href="kalendar.css">
+    <link rel="stylesheet" href="../static/kalendar.css">
 </head>
 <body>
+    <header>
+        <nav class="nav">
+            <ul>
+                <div class="logo">
+                    <img class="logo img" src="../static/logo.webp"/>
+               </div>
+               <br>
+               <div class="nav">
+                <li><a href="home_page.html">Home</a></li>
+                <li><a href="kalendar.html">График</a></li>
+                <li class="dropdown">
+                    <a href="donations.html">Дарения</a>
+                    
+                </li>
+            </ul>
+        </div>
+        <h1 style="color: white;">Young hearts & Old hands</h1>
+        <div class="nav">
+        <img class="logo img" src="../static/log in.png"/>
+            <a href="log_in.html" class="docs-link">Вход</a>
+        </div>
+        </nav>
+    </header>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
     <i><h1>График</h1></i>
+    <div class="dropdown-container">
     <label for="month">Избери месец:</label>
     <select id="month" onchange="updateCalendar()">
         <option value="0">Януари</option>
@@ -29,12 +59,13 @@
         <option value="2025">2025</option>
         <option value="2026">2026</option>
     </select>
+</div>
     <br>
     <br>
     <br>
+  
     <div id="calendar" class="calendar"></div>
-    
-    
-    <script src="kalendar.js"></script>    1
+
+    <script src="../static/kalendar.js"></script>    1
 </body>
 </html>
