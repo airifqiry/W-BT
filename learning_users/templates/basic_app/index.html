@@ -1,10 +1,11 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="bg">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Young heats & Old hands</title>
-    <link rel="stylesheet" href="../static/home_page.css">
+    <link rel="stylesheet" href="{% static 'home_page.css' %}">
 </head>
 <body>
     <!-- Header -->
@@ -12,7 +13,7 @@
         <nav class="nav">
             <ul>
                 <div class="logo">
-                    <img class="logo img" src="../static/logo.webp"/>
+                    <img class="logo img" src="{% static 'logo.webp' %}">
                </div>
                <br>
                <div class="nav">
@@ -26,7 +27,7 @@
         </div>
         <h2 style="color: white;">Young hearts & Old hands</h2>
         <div class="nav">
-        <img class="logo img" src="../static/log in.png"/>
+        <img class="logo img" src="{%static 'log in.png'%}"/>
             <a href="log_in.html" class="docs-link">Вход</a>
         </div>
         </nav>
@@ -44,7 +45,7 @@
             <p>Присъедини се към нас и стани част от една общност, в която добрината движи света!</p>
         </div>
         <div class="hero-image">
-            <img src="../static/elderly.jpg" alt="Caregiver helping elderly person">
+            <img src="{% static 'elderly.jpg' %}" alt="Caregiver helping elderly person">
         </div>
     </section>
 
