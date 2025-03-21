@@ -2,7 +2,7 @@ from django.urls import path,include
 from basic_app import views
 from django.urls import path
 from django.urls import path
-from .views import logout_view
+from .views import logout_view,get_patients
 
 
     
@@ -24,5 +24,6 @@ urlpatterns = [
     path('login/',views.login_view,name='user_login'),
     path('calendar/',views.calendar_view,name='calendar'),
     path('logout/', logout_view, name='logout'),
+    path('api/patients',views.get_patients,name='get_patients')
 ]
 

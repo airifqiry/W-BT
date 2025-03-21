@@ -6,14 +6,9 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
 from django.shortcuts import redirect
 from django.http import JsonResponse
-from .models import UserProfileInfo  # Увери се, че този модел е импортиран
+from .models import UserProfileInfo  
 
-def get_patients(request):
-    # Взимаме всички пациенти от базата данни
-    patients = UserProfileInfo.objects.filter(user_type='patient').values(
-        'user__first_name', 'user__last_name', 'needs', 'location'
-    )
-    return JsonResponse(list(patients), safe=False)
+
 
  
 
@@ -158,3 +153,11 @@ def register_volunteer(request):
 def logout_view(request):
     logout(request)
     return redirect('index') 
+
+
+def get_patients(request):
+    # Взимаме всички пациенти от базата данни
+    patients = UserProfileInfo.objects.filter(user_type='patient').values(
+        'user__first_name', 'user__last_name', 'needs', 'location'
+    )
+    return JsonResponse(list(patients), safe=False)
