@@ -61,7 +61,7 @@ def register_user(request, user_type):
         user_form = UserForm()
         profile_form = UserProfileInfoForm()
 
-    template_name = 'basic_app/registrationP.html' if user_type == 'patient' else 'basic_app/registrationD.html'
+    template_name = 'basic_app/registrationPatient.html' if user_type == 'patient' else 'basic_app/registrationDobrovolci.html'
     return render(request, template_name, {
         'user_form': user_form,
         'profile_form': profile_form,
