@@ -36,10 +36,9 @@ def register_volunteer(request):
 
 def register_user(request, user_type):
     registered = False
-    
     if request.method == 'POST':
         user_form = UserForm(data=request.POST)
-        profile_form = UserProfileInfoForm(data=request.POST)
+        profile_form = UserProfileInfoForm(data=request.POST, files=request.FILES)
 
         if user_form.is_valid() and profile_form.is_valid():
             user = user_form.save()
@@ -48,26 +47,26 @@ def register_user(request, user_type):
 
             profile = profile_form.save(commit=False)
             profile.user = user
-            profile.user_type = user_type  
-
+            profile.user_type = user_type
             if 'profile_pic' in request.FILES:
                 profile.profile_pic = request.FILES['profile_pic']
-
             profile.save()
+
             registered = True
         else:
             print(user_form.errors, profile_form.errors)
     else:
         user_form = UserForm()
         profile_form = UserProfileInfoForm()
-    
+
     template_name = 'basic_app/registaciqPacienti.html' if user_type == 'patient' else 'basic_app/registraciqDobrovolci.html'
     return render(request, template_name, {
         'user_form': user_form,
         'profile_form': profile_form,
         'registered': registered
-
     })
+def login_view(request):
+     return render (request,'basic_app/log_in.html')
 
 
 def user_login(request):
@@ -88,7 +87,7 @@ def user_login(request):
                 login(request,user)
                 # Send the user back to some page.
                 # In this case their homepage.
-                return HttpResponseRedirect(reverse('index'))
+                return redirect('login_success')
             else:
                 # If account is not active:
                 return HttpResponse("Your account is not active.")
@@ -108,4 +107,8 @@ def login_success(request):
     elif profile.user_type == 'patient':
         return redirect('patient_dashboard')
     return redirect('home')
+
+def calendar_view(request):
+    return render(request, 'basic_app/kalendar.html')
+
 

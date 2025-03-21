@@ -18,13 +18,13 @@
                <br>
                <div class="nav">
                 <li><a href="{% url 'index' %}">Home</a></li>
-                <li><a href="{% url 'kalendar' %}">График</a></li>
+                <li><a href="{% url 'basic_app:calendar' %}">График</a></li>
             </ul>
         </div>
         <h1 style="color: white;">Young hearts & Old hands</h1>
         <div class="nav">
         <img class="logo img" src="{% static 'log in.png'%}"/>
-            <a href="{% url 'log_in' %}" class="docs-link">Вход</a>
+        <a href="{% url 'basic_app:user_login' %}" class="docs-link">Вход</a>
         </div>
         </nav>
     </header>
@@ -50,7 +50,12 @@
             </div>
             
             <button type="submit">Регистрация</button>
+            {% if registered %}
+             <p style="color: green;">Успешна регистрация! Моля, влезте в профила си.</p>
+            {% endif %}
+
         </form>
     </div>
 </body>
+
 </html>

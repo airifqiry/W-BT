@@ -1,20 +1,21 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="bg">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Вход</title>
-    <link rel="stylesheet" href="../static/log_in.css">
+    <link rel="stylesheet" href="{% static 'log_in.css' %}">
 </head>
 <body>
     <div class="login-container">
         <h2>Вход</h2>
-        <form>
+        <form method="POST" action="{% url 'basic_app:user_login' %}">
+            {% csrf_token %}
             <div class="input-container">
-                <input type="text" placeholder="Потребителско име" required>
+                <input type="text" name="username" placeholder="Потребителско име" required>
             </div>
             <div class="input-container">
-                <input type="password" placeholder="Парола" required>
+                <input type="password" name="password" placeholder="Парола" required>
             </div>
             <button type="submit" class="login-button">ВХОД</button>
         </form>

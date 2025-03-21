@@ -1,28 +1,29 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="bg">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>График</title>
-    <link rel="stylesheet" href="{% url 'kalendar.css' %}">
+    <link rel="stylesheet" href="{% static 'kalendar.css' %}">
 </head>
 <body>
     <header>
         <nav class="nav">
             <ul>
                 <div class="logo">
-                    <img class="logo img" src="../static/logo.webp"/>
+                    <img class="logo img" src="{% static 'logo.webp' %}"/>
                </div>
                <br>
                <div class="nav">
                 <li><a href="{% url 'index' %}">Home</a></li>
-                <li><a href="{% url 'kalendar' %}">График</a></li>
+                <li><a href="{% url 'basic_app:calendar' %}">График</a></li>
             </ul>
         </div>
         <h1 style="color: white;">Young hearts & Old hands</h1>
         <div class="nav">
-        <img class="logo img" src="../static/log in.png"/>
-            <a href="{% url 'log_in' %}" class="docs-link">Вход</a>
+        <img class="logo img" src="{% static 'log in.png'%}"/>
+        <a href="{% url 'basic_app:user_login' %}" class="docs-link">Вход</a>
         </div>
         </nav>
     </header>
@@ -62,6 +63,6 @@
   
     <div id="calendar" class="calendar"></div>
 
-    <script src="../static/kalendar.js"></script>    1
+    <script src="{%static "kalendar.js"%}"></script>    1
 </body>
 </html>
