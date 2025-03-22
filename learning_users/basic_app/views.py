@@ -30,11 +30,7 @@ def index(request):
     return render(request,'basic_app/index.html')
 
 
-
-
-
-
-def register(request):
+def register_patient(request):
     registered = False
 
     if request.method == 'POST':
@@ -50,6 +46,54 @@ def register(request):
             # 2. Създаване на потребителски профил (но още не го записваме в базата)
             profile = profile_form.save(commit=False)
             profile.user = user
+            profile.save()
+
+            # 3. Автоматично попълване на община и област на база избраното село
+            selected_village = profile_form.cleaned_data['location']  # Това е Settlement обект
+            profile.location = selected_village.name
+            profile.municipality = selected_village.municipality
+            profile.region = selected_village.region
+
+            # 4. Профилна снимка (по избор)
+            if 'profile_pic' in request.FILES:
+                profile.profile_pic = request.FILES['profile_pic']
+
+            
+
+            registered = True
+
+        else:
+            print(user_form.errors, profile_form.errors)
+
+    else:
+        user_form = UserForm()
+        profile_form = UserProfileInfoForm()
+
+    return render(request, 'basic_app/registaciqPacienti.html', {
+        'user_form': user_form,
+        'profile_form': profile_form,
+        'registered': registered
+    })
+
+
+
+def register_volunteer(request):
+    registered = False
+
+    if request.method == 'POST':
+        user_form = UserForm(data=request.POST)
+        profile_form = UserProfileInfoForm(data=request.POST)
+
+        if user_form.is_valid() and profile_form.is_valid():
+            # 1. Създаване на потребител
+            user = user_form.save()
+            user.set_password(user.password)
+            user.save()
+
+            # 2. Създаване на потребителски профил (но още не го записваме в базата)
+            profile = profile_form.save(commit=False)
+            profile.user = user
+            
 
             # 3. Автоматично попълване на община и област на база избраното село
             selected_village = profile_form.cleaned_data['location']  # Това е Settlement обект
@@ -73,7 +117,8 @@ def register(request):
         user_form = UserForm()
         profile_form = UserProfileInfoForm()
 
-    return render(request, 'basic_app/registration.html', {
+    return render(request, 'basic_app/registraciqDobrovolci.html', {
+
         'user_form': user_form,
         'profile_form': profile_form,
         'registered': registered
@@ -127,7 +172,7 @@ def calendar_view(request):
     return render(request, 'basic_app/kalendar.html')
 
 
-@login_required
+
 def patient_home(request):
     return render(request, 'homePacienti.html')
 
@@ -169,15 +214,6 @@ def volunteer_dashboard(request):
     })
 
 
-def register_patient(request):
-    request.GET = request.GET.copy()
-    request.GET['user_type'] = 'patient'
-    return register(request)
-
-def register_volunteer(request):
-    request.GET = request.GET.copy()
-    request.GET['user_type'] = 'volunteer'
-    return register(request)
 
 @login_required
 def user_logout(request):

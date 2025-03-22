@@ -13,12 +13,10 @@ class UserProfileInfo(models.Model):
 
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     phone_number = PhoneNumberField(unique=True,validators=[validate_phone_number])
-    location = models.CharField(max_length=100)
-    municipality = models.CharField(max_length=100)
-    region = models.CharField(max_length=100)
+    location = models.CharField(max_length=100,default='Unknown')
+    municipality = models.CharField(max_length=100,default='Unknown')
+    region = models.CharField(max_length=100,default='Unknown')
     profile_pic = models.ImageField(upload_to='profile_pics', blank=True)
-    #skills = models.CharField(max_length=200, blank=True)
-    needs = models.TextField(blank=True)  # ⬅️ ново
     user_type = models.CharField(max_length=20, choices=USER_TYPES, default='patient')
     assigned_patients = models.ManyToManyField('self', symmetrical=False, related_name='assigned_volunteers', blank=True)
 

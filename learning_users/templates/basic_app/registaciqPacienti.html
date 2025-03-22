@@ -37,22 +37,8 @@
                 {{ user_form.as_p }}
                 {{ profile_form.as_p }}
                 <input type="hidden" name="user_type" value="patient">
-
-
             
-                
-            
-            
-            <label class="checkbox-label">Каква услуга търсите?</label>
-            <div class="checkbox-group">
-                <label><input type="checkbox" name="service" value="Медицинска"> Медицинска</label>
-                <label><input type="checkbox" name="service" value="Доставчик"> Доставчик</label>
-                <label><input type="checkbox" name="service" value="Хигиенист"> Хигиенист</label>
-                <label><input type="checkbox" name="service" value="Готвач"> Готвач</label>
-                <label><input type="checkbox" name="service" value="Психотерапевт"> Психотерапевт</label>
-            </div>
-            
-            <button type="submit">Регистрация</button>
+            <a href="{% url 'basic_app:patient_home' %}"><button type="submit">Регистрация</button></a>
             {% if registered %}
              <p style="color: green;">Успешна регистрация! Моля, влезте в профила си.</p>
             {% endif %}
