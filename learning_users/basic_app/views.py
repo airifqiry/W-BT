@@ -7,6 +7,11 @@ from django.contrib.auth import logout
 from django.shortcuts import redirect
 from django.http import JsonResponse
 from .models import UserProfileInfo  
+from django.views.decorators.http import require_POST
+from django.shortcuts import get_object_or_404
+from django.contrib import messages
+
+
 
 
 
@@ -15,6 +20,7 @@ from .models import UserProfileInfo
 
 # Extra Imports for the Login and Logout Capabilities
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.views import LoginView
 from django.http import HttpResponseRedirect, HttpResponse
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
@@ -29,60 +35,50 @@ def index(request):
 
 
 def register(request):
-
     registered = False
+
     if request.method == 'POST':
-        user_type = request.POST.get('user_type', 'patient')  # по подразбиране
-
-        # Get info from "both" forms
-        # It appears as one form to the user on the .html page
         user_form = UserForm(data=request.POST)
-        profile_form = UserProfileInfoForm(data=request.POST, files=request.FILES)
+        profile_form = UserProfileInfoForm(data=request.POST)
 
-        # Check to see both forms are valid
         if user_form.is_valid() and profile_form.is_valid():
-
-            # Save User Form to Database
+            # 1. Създаване на потребител
             user = user_form.save()
-
-            # Hash the password
             user.set_password(user.password)
-
-            # Update with Hashed password
             user.save()
 
-            # Now we deal with the extra info!
-
-            # Can't commit yet because we still need to manipulate
+            # 2. Създаване на потребителски профил (но още не го записваме в базата)
             profile = profile_form.save(commit=False)
-
-            
             profile.user = user
-            profile.user_type = user_type
+
+            # 3. Автоматично попълване на община и област на база избраното село
+            selected_village = profile_form.cleaned_data['location']  # Това е Settlement обект
+            profile.location = selected_village.name
+            profile.municipality = selected_village.municipality
+            profile.region = selected_village.region
+
+            # 4. Профилна снимка (по избор)
             if 'profile_pic' in request.FILES:
-                
-                # If yes, then grab it from the POST form reply
                 profile.profile_pic = request.FILES['profile_pic']
+
+            # 5. Записване на профила в базата данни
             profile.save()
 
             registered = True
 
         else:
-            # One of the forms was invalid if this else gets called.
-            print(user_form.errors,profile_form.errors)
+            print(user_form.errors, profile_form.errors)
 
     else:
-        # Was not an HTTP post so we just render the forms as blank.
         user_form = UserForm()
         profile_form = UserProfileInfoForm()
-        user_type = request.GET.get('user_type', 'patient')  # fallback ако липсва
 
-    template_name = 'basic_app/registaciqPacienti.html' if user_type == 'patient' else 'basic_app/registraciqDobrovolci.html'
-    return render(request, template_name, {
+    return render(request, 'basic_app/registration.html', {
         'user_form': user_form,
         'profile_form': profile_form,
         'registered': registered
     })
+
 def login_view(request):
      return render (request,'basic_app/log_in.html')
 
@@ -132,12 +128,46 @@ def calendar_view(request):
 
 
 @login_required
-def volunteer_dashboard(request):
-   return render(request, 'basic_app/homeDobrovolci.html')  # или шаблон по избор
+def patient_home(request):
+    return render(request, 'homePacienti.html')
+
+
+
 
 @login_required
-def patient_dashboard(request):
-    return render(request, 'basic_app/homePacienti.html')  # или шаблон по избор
+def volunteer_dashboard(request):
+    volunteer = request.user.userprofileinfo
+    location = volunteer.location
+    municipality = volunteer.municipality
+    region = volunteer.region
+
+    # Опитваме се първо да намерим пациенти от същото село
+    patients = UserProfileInfo.objects.filter(
+        user_type='patient',
+        location__iexact=location
+    )
+
+    if not patients.exists():
+        # Ако няма пациенти от същото село – търси от същата община
+        patients = UserProfileInfo.objects.filter(
+            user_type='patient',
+            municipality__iexact=municipality
+        )
+
+    if not patients.exists():
+        # Ако няма и от общината – търси от същата област
+        patients = UserProfileInfo.objects.filter(
+            user_type='patient',
+            region__iexact=region
+        )
+
+    return render(request, 'basic_app/volunteer_dashboard.html', {
+        'patients': patients,
+        'location': location,
+        'municipality': municipality,
+        'region': region,
+    })
+
 
 def register_patient(request):
     request.GET = request.GET.copy()
@@ -153,6 +183,28 @@ def register_volunteer(request):
 def user_logout(request):
     logout(request)
     return redirect('index') 
+
+@require_POST
+@login_required
+def assign_patient(request):
+    volunteer = request.user.userprofileinfo
+    patient_id = request.POST.get('patient_id')
+    patient = get_object_or_404(UserProfileInfo, id=patient_id, user_type='patient')
+
+    # Добавяме пациента към избраните
+    volunteer.assigned_patients.add(patient)
+    messages.success(request, f"Пациент {patient.user.get_full_name()} беше добавен!")
+
+    return redirect('volunteer_dashboard')
+
+class CustomLoginView(LoginView):
+    def get_success_url(self):
+        user_type = self.request.user.profile.user_type
+        if user_type == 'volunteer':
+            return reverse('volunteer_dashboard')  # ще сочи към volunteer_dashboard.html
+        elif user_type == 'patient':
+            return reverse('home_patient')  # ще сочи към homePacienti.html
+        return super().get_success_url()
 
 
 def get_patients(request):

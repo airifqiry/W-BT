@@ -1,9 +1,12 @@
 from django import forms
 from django.contrib.auth.models import User
-from basic_app.models import UserProfileInfo  
+from basic_app.models import UserProfileInfo,Settlement
 from phonenumber_field.formfields import PhoneNumberField  
 from basic_app.validators import custom_pass_validation
 from basic_app.validators import validate_phone_number
+from django import forms
+
+
 
 class UserForm(forms.ModelForm):
     password = forms.CharField(
@@ -45,26 +48,30 @@ class UserProfileInfoForm(forms.ModelForm):
             'invalid': 'Моля, въведете валиден телефонен номер.'
         }
     )
-    
-    location = forms.CharField(
-        max_length=100,
-        required=True,
-        label='Местоживеене',
-        error_messages={
-            'required': 'Моля, въведете местоживеене.'
-        }
-    )
+
 
     profile_pic = forms.ImageField(
         required=False,
         label='Профилна снимка'
-    )
+    ) 
 
-
+    location = forms.ModelChoiceField(
+        queryset=Settlement.objects.all().order_by('name'),
+        to_field_name='name',
+        empty_label="Изберете село",
+        label="Населено място (село)",
+        widget=forms.Select(attrs={'class': 'village-select'}))
+    
 
     class Meta:
         model = UserProfileInfo
-        fields = ('phone_number', 'location', 'profile_pic')
+        fields = ('phone_number', 'profile_pic', 'skills', 'needs', 'user_type', 'location')
+
+
+
+
+   
+
 
     def clean_phone_number(self):
         phone_number = self.cleaned_data.get('phone_number')
