@@ -1,29 +1,64 @@
 <!DOCTYPE html>
-<html lang="bg">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Доброволчески Дашборд</title>
- 
+    <title>Document</title>
 </head>
 <body>
+    <h2>Здравей, доброволец от {{ location }}!</h2>
 
-    <header>Доброволчески Дашборд</header>
+{% if patients %}
+    <p>Пациенти, които са:</p>
+    <ul>
+        <li>От село <strong>{{ location }}</strong></li>
+        <li>или от община <strong>{{ municipality }}</strong></li>
+        <li>или от област <strong>{{ region }}</strong></li>
+    </ul>
 
-    <table>
-        <tr>
-            <th>Име</th>
-            <th>Нужди</th>
-            <th>Местоположение</th>
-        </tr>
-        <tbody id="patients-list">
-            <!-- Пациентите ще се зареждат тук -->
-        </tbody>
+    <!-- <table border="1">
+      <tr>
+        <th>Име</th>
+        <th>Нужди</th>
+        <th>Местоположение</th>
+      </tr>
+      {% for patient in patients %}
+      <tr>
+        <td>{{ patient.user.get_full_name }}</td>
+        <td>{{ patient.needs }}</td>
+        <td>{{ patient.location }}</td>
+      </tr>
+      {% endfor %}
     </table>
+{% else %}
+    <p>В момента няма пациенти във вашия район.</p>
+{% endif %}
+-->
 
-    <header>Доброволчески Дашборд</header>
 
-
+<table border="1">
+    <tr>
+      <th>Име</th>
+      <th>Нужди</th>
+      <th>Местоположение</th>
+      <th>Телефонен номер</th>
+      <th>Действие</th>
+    </tr>
+    {% for patient in patients %}
+    <tr>
+      <td>{{ patient.user.get_full_name }}</td>
+      <td>{{ patient.needs }}</td>
+      <td>{{ patient.location }}</td>
+      <td>
+        <form method="POST" action="{% url 'assign_patient' %}">
+          {% csrf_token %}
+          <input type="hidden" name="patient_id" value="{{ patient.id }}">
+          <button type="submit">Избери</button>
+        </form>
+      </td>
+    </tr>
+    {% endfor %}
+  </table>
+  
 </body>
 </html>
-
