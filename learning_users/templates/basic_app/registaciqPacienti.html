@@ -38,9 +38,9 @@
                 {{ profile_form.as_p }}
                 <input type="hidden" name="user_type" value="patient">
             
-            <a href="{% url 'basic_app:patient_home' %}"><button type="submit">Регистрация</button></a>
+            <button type="submit">Регистрация</button></a>
             {% if registered %}
-             <p style="color: green;">Успешна регистрация! Моля, влезте в профила си.</p>
+            <a href="{% url 'basic_app:index_patient' %}" > <p style="color: green;">Успешна регистрация! Моля, влезте в профила си.</p></a>
             {% endif %}
 
         </form>

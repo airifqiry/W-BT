@@ -16,7 +16,7 @@ class UserProfileInfo(models.Model):
     location = models.CharField(max_length=100,default='Unknown')
     municipality = models.CharField(max_length=100,default='Unknown')
     region = models.CharField(max_length=100,default='Unknown')
-    profile_pic = models.ImageField(upload_to='profile_pics', blank=True)
+    
     user_type = models.CharField(max_length=20, choices=USER_TYPES, default='patient')
     assigned_patients = models.ManyToManyField('self', symmetrical=False, related_name='assigned_volunteers', blank=True)
 

@@ -4,7 +4,6 @@ from django.http import JsonResponse  # Добави това
 from .models import UserProfileInfo  
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
-from django.shortcuts import redirect
 from django.http import JsonResponse
 from .models import UserProfileInfo  
 from django.views.decorators.http import require_POST
@@ -29,6 +28,11 @@ from django.contrib.auth.decorators import login_required
 def index(request):
     return render(request,'basic_app/index.html')
 
+def v_index(request):
+    return render(request,'basic_app/homeDobrovolci.html')
+
+def listofp(request):
+    return render(request,'basic_app/list.html')
 
 def register_patient(request):
     registered = False
@@ -55,8 +59,7 @@ def register_patient(request):
             profile.region = selected_village.region
 
             # 4. Профилна снимка (по избор)
-            if 'profile_pic' in request.FILES:
-                profile.profile_pic = request.FILES['profile_pic']
+            
 
             
 
@@ -101,9 +104,8 @@ def register_volunteer(request):
             profile.municipality = selected_village.municipality
             profile.region = selected_village.region
 
-            # 4. Профилна снимка (по избор)
-            if 'profile_pic' in request.FILES:
-                profile.profile_pic = request.FILES['profile_pic']
+            
+                
 
             # 5. Записване на профила в базата данни
             profile.save()
@@ -125,7 +127,7 @@ def register_volunteer(request):
     })
 
 def login_view(request):
-     return render (request,'basic_app/log_in.html')
+     return render (request,'basic_app/login.html')
 
 
 def user_login(request):
@@ -136,7 +138,7 @@ def user_login(request):
         password = request.POST.get('password')
 
         # Django's built-in authentication function:
-        user = authenticate(username=username, password=password)
+        user = authenticate(request,username=username, password=password)
 
         # If we have a user
         if user:
@@ -146,13 +148,13 @@ def user_login(request):
                 login(request,user)
                 # Send the user back to some page.
                 # In this case their homepage.
-                return redirect('login_success')
+                return redirect('basic_app/volunteer_dashboard')
             else:
                 # If account is not active:
-                return HttpResponse("Your account is not active.")
+                return render(request, 'basic_app/login.html')
+
         else:
-            print("Someone tried to login and failed.")
-            print("They used username: {} and password: {}".format(username,password))
+
             return HttpResponse("Invalid login details supplied.")
 
     else:
@@ -162,19 +164,16 @@ def user_login(request):
 @login_required
 def login_success(request):
     profile = request.user.userprofileinfo
-    if profile.user_type == 'volunteer':
-        return redirect('volunteer_dashboard')
-    elif profile.user_type == 'patient':
-        return redirect('patient_dashboard')
-    return redirect('home')
+    return redirect('basic_app/volunteer_dashboard')
+
 
 def calendar_view(request):
     return render(request, 'basic_app/kalendar.html')
 
 
 
-def patient_home(request):
-    return render(request, 'homePacienti.html')
+def index_patient (request):
+    return render(request, 'basic_app/homePacienti.html')
 
 
 

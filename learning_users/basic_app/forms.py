@@ -50,22 +50,21 @@ class UserProfileInfoForm(forms.ModelForm):
     )
 
 
-    profile_pic = forms.ImageField(
-        required=False,
-        label='Профилна снимка'
-    ) 
+
+    
 
     location = forms.ModelChoiceField(
-        queryset=Settlement.objects.all().order_by('name'),
-        to_field_name='name',
-        empty_label="Изберете село",
-        label="Населено място (село)",
-        widget=forms.Select(attrs={'class': 'village-select'}))
+    queryset=Settlement.objects.all().order_by('name'),
+    empty_label="Изберете село",
+    label="Населено място ",
+    widget=forms.Select(attrs={'class': 'village-select'})
+)
+
     
 
     class Meta:
         model = UserProfileInfo
-        fields = ('phone_number', 'profile_pic',  'user_type', 'location')
+        fields = ('phone_number', 'user_type', 'location')
 
 
 
@@ -82,8 +81,4 @@ class UserProfileInfoForm(forms.ModelForm):
     def clean(self):
         cleaned_data = super().clean()
         user_type = cleaned_data.get('user_type')
-        profile_pic = cleaned_data.get('profile_pic')
-
-        if user_type == 'volunteer' and not profile_pic:
-            self.add_error('profile_pic', 'Доброволците трябва да качат профилна снимка.')
-        return cleaned_data
+        

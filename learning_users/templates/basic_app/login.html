@@ -9,7 +9,7 @@
 <body>
     <div class="login-container">
         <h2>Вход</h2>
-        <form method="POST" action="{% url 'basic_app:user_login' %}">
+        <form method="POST" action="{% url 'basic_app:vol_index' %}">
             {% csrf_token %}
             <div class="input-container">
                 <input type="text" name="username" placeholder="Потребителско име" required>

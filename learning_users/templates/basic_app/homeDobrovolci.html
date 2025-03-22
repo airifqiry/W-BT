@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-{ % load static % }
+{%load static%}
 <html lang="bg">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Young heats & Old hands</title>
-    <link rel="stylesheet" href="{% static 'homeDobrovolci.css'%}">
+    <link rel="stylesheet" href="{% static 'homeDobrovolci.css' %}">
 </head>
 <body>
     <!-- Header -->
@@ -17,12 +17,9 @@
                </div>
                <br>
                <div class="nav">
-                <li><a href="#">Home</a></li>
-                <li><a href="kalendar.html">График</a></li>
-                <li class="dropdown">
-                    <a href="donations.html">Дарения</a>
-                    
-                </li>
+                <li><a href={% url 'index' %}>Home</a></li>
+                
+                
             </ul>
         </div>
         <h2 style="color: white;">Young hearts & Old hands</h2>
@@ -86,12 +83,12 @@
 <div class="cta-container">
     <section class="cta">
         <h2>Ако все още не си избрал хората, на които можеш да помогнеш</h2>
-        <a href="#"> <button>СПИСЪК</button></a>
+        <a href="{% url 'basic_app:list_of_patients' %}"> <button>СПИСЪК</button></a>
     </section>
 
     <section class="cta">
         <h2>Ако вече си избрал, запиши на кого и кога ще помагаш</h2>
-        <a href="#"> <button>ГРАФИК</button></a>
+        <a href="{% url 'basic_app:calendar' %}"> <button>ГРАФИК</button></a>
     </section>
 </div>
 
